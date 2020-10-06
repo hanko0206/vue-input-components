@@ -17,11 +17,6 @@
 <script>
 import VueInput from "./components/atoms/vue-input.vue"
 export default {
-  data() {
-    return {
-      password_value: ""
-    }
-  },
   components: {
     VueInput
   },
