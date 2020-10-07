@@ -86,7 +86,7 @@ export default {
    font-style: italic;
    font-size: 12px;
    &.is-error {
-     color: red;
+     color: red; 
    }
    &.is-success {
      color: green;

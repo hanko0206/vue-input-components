@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Reusable components</h1>
-    <hr/>
+    <hr>
     <p>Minimum eight characters, at least one letter and one number</p>
     <vue-input 
       v-model="password_value"
@@ -11,14 +11,35 @@
       :input_validator="checkInput"
       :required="true"
       />
+      <hr>
+      <h3>Checkbox and Radio button</h3>
+      <p>Checkbox</p>
+      <VueRadioCheckbox @click="selectedCourse( $event)" label="Vue" value="Vue"/>
+      <VueRadioCheckbox @click="selectedCourse($event)" label="React" value="React"/>
+      <VueRadioCheckbox @click="selectedCourse($event)" label="Angular" value="Angular"/>
+      <p>Selected course(s) are: {{course.join(", ")}}</p>
+      <p>Radio button</p>
+      <VueRadioCheckbox type="radio" value="Male" label="Male" name="gender" @click="selectedGender($event)"/>
+      <VueRadioCheckbox type="radio" value="Female" label="Female" name="gender" @click="selectedGender($event)"/>
+      <VueRadioCheckbox type="radio" value="Others" label="Others" name="gender" @click="selectedGender($event)"/>
+      <p>Selected gender is: {{ gender }}</p>
   </div>
 </template>
 
 <script>
-import VueInput from "./components/atoms/vue-input.vue"
+import VueInput from "./components/molecules/vue-input.vue"
+import VueRadioCheckbox from "./components/molecules/vue-radio-checkbox"
 export default {
+  data() {
+    return {
+      password_value: "",
+      course: [],
+      gender: ""
+    }
+  },
   components: {
-    VueInput
+    VueInput,
+    VueRadioCheckbox
   },
   methods: {
     checkInput(value){
@@ -32,8 +53,18 @@ export default {
         }
         : { result: 'is-success', message: "Valid password"}
       }
-      console.log(result)
      return result; 
+    },
+    selectedCourse(event) {
+      if(event.target.checked ) {
+        this.course.push(event.target.value)
+      }else {
+        const index = this.course.findIndex(c => c === event.target.value)
+        this.course.splice(index, 1)
+      }
+    },
+    selectedGender(e) {
+      this.gender = e.target.value
     }
   }
 }
