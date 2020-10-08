@@ -14,21 +14,29 @@
       <hr>
       <h3>Checkbox and Radio button</h3>
       <p>Checkbox</p>
-      <VueRadioCheckbox @click="selectedCourse( $event)" label="Vue" value="Vue"/>
-      <VueRadioCheckbox @click="selectedCourse($event)" label="React" value="React"/>
-      <VueRadioCheckbox @click="selectedCourse($event)" label="Angular" value="Angular"/>
+      <vue-radio-checkbox @click="selectedCourse( $event)" label="Vue" value="Vue"/>
+      <vue-radio-checkbox @click="selectedCourse($event)" label="React" value="React"/>
+      <vue-radio-checkbox @click="selectedCourse($event)" label="Angular" value="Angular"/>
       <p>Selected course(s) are: {{course.join(", ")}}</p>
       <p>Radio button</p>
-      <VueRadioCheckbox type="radio" value="Male" label="Male" name="gender" @click="selectedGender($event)"/>
-      <VueRadioCheckbox type="radio" value="Female" label="Female" name="gender" @click="selectedGender($event)"/>
-      <VueRadioCheckbox type="radio" value="Others" label="Others" name="gender" @click="selectedGender($event)"/>
+      <vue-radio-checkbox type="radio" value="Male" label="Male" name="gender" @click="selectedGender($event)"/>
+      <vue-radio-checkbox type="radio" value="Female" label="Female" name="gender" @click="selectedGender($event)"/>
+      <vue-radio-checkbox type="radio" value="Others" label="Others" name="gender" @click="selectedGender($event)"/>
       <p>Selected gender is: {{ gender }}</p>
+      <hr>
+      <h3>Button</h3>
+      <vue-button @click="buttonClicked" label="Button w/ click event"/> <br><br>
+      <vue-button :fullWidth="true" label="Button w/ full width"/><br><br>
+      <vue-button :fullWidth="true" label="Danger button full width" :isDanger="true"/><br><br>
+      <vue-button :fullWidth="true" label="Success button full width" :isSuccess="true"/><br><br>
+      <vue-button :fullWidth="true" label="Success button full width" :isWarning="true"/>
   </div>
 </template>
 
 <script>
-import VueInput from "./components/molecules/vue-input.vue"
+import VueInput from "./components/molecules/vue-input"
 import VueRadioCheckbox from "./components/molecules/vue-radio-checkbox"
+import VueButton from "./components/atoms/vue-button"
 export default {
   data() {
     return {
@@ -39,7 +47,8 @@ export default {
   },
   components: {
     VueInput,
-    VueRadioCheckbox
+    VueRadioCheckbox,
+    VueButton
   },
   methods: {
     checkInput(value){
@@ -65,6 +74,9 @@ export default {
     },
     selectedGender(e) {
       this.gender = e.target.value
+    },
+    buttonClicked() {
+      alert("Button was clicked")
     }
   }
 }
